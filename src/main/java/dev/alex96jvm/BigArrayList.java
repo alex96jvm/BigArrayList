@@ -63,17 +63,30 @@ public class BigArrayList<T> implements BigList<T> {
 
     @Override
     public void sort() {
-
+        new QuickSort<T>().sort(array, size);
     }
 
     @Override
     public void sort(Comparator<? super T> comparator) {
-
+        new QuickSort<T>(comparator).sort(array, size);
     }
 
     @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < size; i++) {
+            sb.append(array[i]);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
     private void increaseCapacity() {
