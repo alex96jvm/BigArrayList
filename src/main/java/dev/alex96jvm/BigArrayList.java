@@ -19,12 +19,12 @@ public class BigArrayList<T> implements BigList<T>, Iterable<T> {
     /**
      * Внутренний массив для хранения элементов списка.
      */
-    T[] array;
+    private T[] array;
 
     /**
      * Текущее количество элементов в списке.
      */
-    int size;
+    private int size;
 
     /**
      * Конструктор по умолчанию, создающий список с начальной вместимостью 1000 элементов.
@@ -32,7 +32,6 @@ public class BigArrayList<T> implements BigList<T>, Iterable<T> {
     @SuppressWarnings("unchecked")
     public BigArrayList() {
         array = (T[]) new Object[1000];
-        size = 0;
     }
 
     /**
@@ -47,7 +46,6 @@ public class BigArrayList<T> implements BigList<T>, Iterable<T> {
             throw new IllegalArgumentException("Недопустимая вместимость " + capacity);
         }
         array = (T[]) new Object[capacity];
-        size = 0;
     }
 
     /**
@@ -102,8 +100,8 @@ public class BigArrayList<T> implements BigList<T>, Iterable<T> {
     public T remove(int index) {
         checkIndex(index);
         T removedElement = array[index];
-        for (int i = index; i < size - 1; i++) {
-            array[i] = array[i + 1];
+        if (index < size - 1) {
+            System.arraycopy(array, index + 1, array, index, size - index - 1);
         }
         array[size - 1] = null;
         size--;
@@ -113,11 +111,10 @@ public class BigArrayList<T> implements BigList<T>, Iterable<T> {
     /**
      * Очищает список, удаляя все элементы.
      */
+    @SuppressWarnings("unchecked")
     @Override
     public void clear() {
-        for (int i = 0; i < size; i++) {
-            array[i] = null;
-        }
+        array = (T[]) new Object[size];
         size = 0;
     }
 
@@ -126,7 +123,7 @@ public class BigArrayList<T> implements BigList<T>, Iterable<T> {
      */
     @Override
     public void sort() {
-        new QuickSort<T>().sort(array, size);
+        QuickSort.sort(array, size, null);
     }
 
     /**
@@ -136,7 +133,7 @@ public class BigArrayList<T> implements BigList<T>, Iterable<T> {
      */
     @Override
     public void sort(Comparator<? super T> comparator) {
-        new QuickSort<T>(comparator).sort(array, size);
+        QuickSort.sort(array, size, comparator);
     }
 
     /**
