@@ -46,7 +46,7 @@
         <dependency>
             <groupId>com.github.alex96jvm</groupId>
             <artifactId>BigArrayList</artifactId>
-            <version>master-SNAPSHOT</version>
+            <version>V1</version>
         </dependency>
     </dependencies>
 ```
