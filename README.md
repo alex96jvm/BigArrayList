@@ -32,6 +32,25 @@
 - **iterator()**: Возвращает итератор для перебора элементов списка.
 - **forEach(Consumer<? super T> action)**: Выполняет заданное действие для каждого элемента списка.
 
+## Простое внедрение в проект
+
+```xmlns
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.alex96jvm</groupId>
+            <artifactId>BigArrayList</artifactId>
+            <version>master-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+```
+
 ## Пример использования
 
 ```java
@@ -57,3 +76,4 @@ public class Main {
         System.out.println(list); // Выведет: [One, Three, Zero]
     }
 }
+```
